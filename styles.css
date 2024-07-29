@@ -23,7 +23,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-image: url('rocas1.PNG');
+    background-image: url('rocas1.png');
     background-repeat: repeat-x;
     background-size: auto 100%; /* Ajusta el tamaño del fondo */
     animation: moverRocas 60s linear infinite; /* Animación para mover las rocas */
@@ -86,11 +86,13 @@ body {
 
 #timón {
     position: absolute;
-    bottom: -10px; /* Ajusta para que el timón esté fuera del marco */
+    bottom: 10px; /* Ajusta para que el timón esté fuera del marco */
     right: 20px;
-    width: 150px; /* Tamaño más grande del timón */
-    height: 150px; /* Tamaño más grande del timón */
+    width: 90px; /* Tamaño más grande del timón */
+    height: 100px; /* Tamaño más grande del timón */
     transition: transform 0.1s; /* Suaviza el movimiento del timón */
+    transition: top 0.3s ease; /* Transición suave para el movimiento vertical */
+    /* Otros estilos... */
 }
 
 @keyframes parpadear {
@@ -115,8 +117,27 @@ body {
     font-size: 20px;
     text-align: center;
     line-height: 50px;
+    
+}
+/* Estilo para el botón de iniciar */
+#btnIniciar {
+    position: absolute; /* Posición absoluta para poder centrarlo */
+    top: 50%; /* Posicionarlo verticalmente en el medio */
+    left: 50%; /* Posicionarlo horizontalmente en el medio */
+    transform: translate(-50%, -50%); /* Ajustar para centrar perfectamente */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño del texto */
+    color: white; /* Color del texto */
+    background-color: #007bff; /* Color de fondo del botón (azul) */
+    border: none; /* Quitar borde predeterminado */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
 }
 
+#btnIniciar:hover {
+    background-color: #0056b3; /* Color de fondo cuando el mouse está sobre el botón */
+}
 #btnA { top: 330px; left: 10px; }
 #btnS { top: 390px; left: 10px; }
 #btnW { top: 450px; left: 10px; }
@@ -137,13 +158,13 @@ body {
     }
 
     .avion-rival {
-        width: 40px; /* Ajusta el tamaño del avión rival para móviles */
-        height: 20px; /* Ajusta el tamaño del avión rival para móviles */
+        width: 43px; /* Ajusta el tamaño del avión rival para móviles */
+        height: 23px; /* Ajusta el tamaño del avión rival para móviles */
     }
 
     #avion {
-        width: 55px; /* Ajusta el tamaño del avión principal para móviles */
-        height: 30px; /* Ajusta el tamaño del avión principal para móviles */
+        width: 60px; /* Ajusta el tamaño del avión principal para móviles */
+        height: 35px; /* Ajusta el tamaño del avión principal para móviles */
     }
 
     .bala {
@@ -163,8 +184,8 @@ body {
     }
 
     #timón {
-        width: 110px; /* Tamaño más pequeño del timón para móviles */
-        height: 110px; /* Tamaño más pequeño del timón para móviles */
+        width: 90px; /* Tamaño más pequeño del timón para móviles */
+        height: 120px; /* Tamaño más pequeño del timón para móviles */
     }
 
     .boton {
