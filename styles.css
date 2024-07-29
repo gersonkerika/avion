@@ -9,7 +9,7 @@ body {
 }
 
 #marco {
-    border: 2px solid #000;
+    border: 2px solid #b9161600;
     width: 650px; /* Ancho del marco */
     height: 500px; /* Alto del marco */
     position: relative;
@@ -46,8 +46,8 @@ body {
 
 #avion {
     position: absolute;
-    width: 80px; /* Ajusta el tamaño según tu imagen */
-    height: 40px; /* Ajusta el tamaño según tu imagen */
+    width: 90px; /* Ajusta el tamaño según tu imagen */
+    height: 35px; /* Ajusta el tamaño según tu imagen */
     top: 50%; /* Ajustar verticalmente según necesidad */
     left: 50%; /* Ajustar horizontalmente según necesidad */
     transform: translate(-50%, -50%); /* Centrar el avión */
@@ -93,6 +93,7 @@ body {
     transition: transform 0.1s; /* Suaviza el movimiento del timón */
     transition: top 0.3s ease; /* Transición suave para el movimiento vertical */
     /* Otros estilos... */
+    
 }
 
 @keyframes parpadear {
@@ -109,7 +110,7 @@ body {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-color: #007bff;
+    background-color: #007bff82;
     color: white;
     border: none;
     border-radius: 5px;

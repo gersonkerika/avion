@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="styles.css"> <!-- Enlaza el archivo CSS -->
 </head>
 <body>
-   
+    <img id="timón" src="timon.png" alt="Timón">
     <div id="marco">
-        <img id="timón" src="timon.png" alt="Timón">
         <button id="btnA" class="boton">A</button>
         <button id="btnIniciar">Iniciar Juego</button>
         <button id="btnS" class="boton">S</button>
@@ -19,8 +18,10 @@
         <div id="fondo"></div>
         <img id="avion" src="avion.png" alt="Avión jugador">
         <div id="puntuacion">Puntuación: 0</div>
-    
     </div>
+
+    <!-- Elemento de audio para la música del juego -->
+    <audio id="musicaFondo" src="musica.mp3" preload="auto"></audio>
 
     <script src="script.js"></script> <!-- Enlaza el archivo JS -->
 </body>

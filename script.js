@@ -3,6 +3,7 @@ const marco = document.getElementById('marco'); // Obtener el contenedor del jue
 const puntuacionElemento = document.getElementById('puntuacion'); // Elemento HTML para la puntuación
 const timon = document.getElementById('timón'); // Obtener el timón
 const btnIniciar = document.getElementById('btnIniciar');
+const musicaFondo = new Audio('musica.mp3'); // Música de fondo
 const btnPausar = document.getElementById('pausarBtn');
 const btnReanudar = document.getElementById('reanudarBtn');
     let avionX = 50; // posición inicial horizontal del avión
@@ -13,7 +14,7 @@ const btnReanudar = document.getElementById('reanudarBtn');
     let balas = []; // Array para almacenar balas disparadas
     let velocidadAviones = 1; // Velocidad normal de los aviones rivales
     const velocidadAtaque = 0.9; // Velocidad reducida durante el ataque
-    let numAvionesRivales = 4; // Número inicial de aviones rivales
+    let numAvionesRivales = 2; // Número inicial de aviones rivales
     let puntuacion = 0; // Puntuación inicial
     let juegoActivo = false; // Bandera para controlar si el juego está activo
     let juegoPausado = false; // Bandera para controlar si el juego está pausado
@@ -24,6 +25,14 @@ let movimientoVerticalTimon = 0;
     const avion = document.getElementById('avion');
     avion.style.left = `${avionX}px`;
     avion.style.top = `${avionY}px`;
+    // Función para reproducir música de fondo
+function reproducirMusicaFondo() {
+    musicaFondo.loop = true; // Repetir la música en bucle
+    musicaFondo.volume = 0.5; // Ajustar el volumen (0.0 a 1.0)
+    musicaFondo.play().catch(error => {
+        console.error('Error al reproducir la música de fondo:', error);
+    });
+}
 
     // Función para crear aviones rivales de forma aleatoria
     function crearAvionRival() {
@@ -69,13 +78,13 @@ let movimientoVerticalTimon = 0;
             if (juegoActivo && !juegoPausado) {
                 // Obtener la posición actual del avión principal
                 const avionPrincipalRect = avion.getBoundingClientRect();
-                const avionPrincipalX = avionPrincipalRect.left + avionPrincipalRect.width / 2;
-                const avionPrincipalY = avionPrincipalRect.top + avionPrincipalRect.height / 2;
+                const avionPrincipalX = avionPrincipalRect.left + avionPrincipalRect.width / -10;
+                const avionPrincipalY = avionPrincipalRect.top + avionPrincipalRect.height / -10;
 
                 // Obtener la posición actual del avión rival
                 const avionRivalRect = avionRival.getBoundingClientRect();
-                const avionRivalX = avionRivalRect.left + avionRivalRect.width / 2;
-                const avionRivalY = avionRivalRect.top + avionRivalRect.height / 2;
+                const avionRivalX = avionRivalRect.left + avionRivalRect.width / -10;
+                const avionRivalY = avionRivalRect.top + avionRivalRect.height / -10;
 
                 // Calcular la dirección hacia el avión principal
                 const deltaX = avionPrincipalX - avionRivalX;
@@ -90,8 +99,8 @@ let movimientoVerticalTimon = 0;
 
                 // Verificar si el avión rival ya está muy cerca del avión principal
                 if (distancia < 5) {
-                    nuevaPosX = avionPrincipalX - avionRivalRect.width / 2;
-                    nuevaPosY = avionPrincipalY - avionRivalRect.height / 2;
+                    nuevaPosX = avionPrincipalX - avionRivalRect.width / -10;
+                    nuevaPosY = avionPrincipalY - avionRivalRect.height / -10;
                 }
 
                 // Mover el avión rival hacia el avión principal
@@ -210,17 +219,18 @@ let movimientoVerticalTimon = 0;
         avionesRivales.forEach(avionRival => {
             balas.forEach(bala => {
                 if (colision(avionRival, bala)) {
+                    console.log('Colisión detectada');
                     // Eliminar la bala y el avión rival del DOM
                     bala.remove();
                     balas = balas.filter(b => b !== bala);
-
+    
                     avionRival.remove();
                     avionesRivales = avionesRivales.filter(a => a !== avionRival);
-
+    
                     // Incrementar la puntuación
                     puntuacion++;
                     puntuacionElemento.textContent = `Puntuación: ${puntuacion}`;
-
+    
                     // Crear un nuevo avión rival para reemplazar el eliminado
                     crearAvionRival();
                 }
@@ -243,11 +253,13 @@ let movimientoVerticalTimon = 0;
         const top2 = rect2.top;
         const bottom2 = rect2.bottom;
 
-        // Verificar colisión teniendo en cuenta las áreas de los aviones
-        return !(right1 < left2 ||
-            left1 > right2 ||
-            bottom1 < top2 ||
-            top1 > bottom2);
+          // Ajustes para tener en cuenta el tamaño de los elementos
+    const margen = 10; // Ajusta este valor según el tamaño de tus elementos y cómo deben interactuar
+
+    return !(rect1.right - margen < rect2.left ||
+             rect1.left + margen > rect2.right ||
+             rect1.bottom - margen < rect2.top ||
+             rect1.top + margen > rect2.bottom);
     }
 
 
@@ -256,7 +268,7 @@ let movimientoVerticalTimon = 0;
         juegoActivo = false;
         alert(`¡¡Game Over!: ${puntuacion}`);
         location.reload(); // Recargar la página para reiniciar el juego
-    }
+    }    
   // Función para iniciar el juego
 function iniciarJuego() {
     if (juegoActivo) return; // Prevenir múltiples inicios
@@ -271,9 +283,15 @@ function iniciarJuego() {
     avionesRivales = [];
     balas.forEach(bala => bala.remove());
     balas = [];
-
+ // Reproducir música de fondo
+ reproducirMusicaFondo();
+ // Evento de botón para iniciar el juego
+btnIniciar.addEventListener('click', iniciarJuego);
     // Crear aviones rivales iniciales
     crearAvionesRivales();
+    setInterval(moverAvionesRivales, 2000); // Mover aviones rivales cada 100ms
+    setInterval(moverBalas, 100); // Mover balas cada 20ms
+    setInterval(verificarColisiones, 300); // Verificar colisiones cada 100ms
 
     // Iniciar el ciclo de actualización del juego
     requestAnimationFrame(actualizarJuego);
