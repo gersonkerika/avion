@@ -1,0 +1,180 @@
+/* Estilos generales para computadoras */
+body {
+    display: flex;
+    background-image: url('fondo.jpg');
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#marco {
+    border: 2px solid #000;
+    width: 650px; /* Ancho del marco */
+    height: 500px; /* Alto del marco */
+    position: relative;
+    overflow: hidden; /* Para recortar el contenido que exceda el marco */
+}
+
+#fondo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('rocas1.PNG');
+    background-repeat: repeat-x;
+    background-size: auto 100%; /* Ajusta el tamaño del fondo */
+    animation: moverRocas 60s linear infinite; /* Animación para mover las rocas */
+}
+
+@keyframes moverRocas {
+    from {
+        background-position: 0 0; /* Posición inicial del fondo */
+    }
+    to {
+        background-position: -1000px 0; /* Posición final del fondo (ajustar según necesidad) */
+    }
+}
+
+.avion-rival {
+    position: absolute;
+    width: 60px; /* Ajusta el tamaño según tu imagen */
+    height: 30px; /* Ajusta el tamaño según tu imagen */
+}
+
+#avion {
+    position: absolute;
+    width: 80px; /* Ajusta el tamaño según tu imagen */
+    height: 40px; /* Ajusta el tamaño según tu imagen */
+    top: 50%; /* Ajustar verticalmente según necesidad */
+    left: 50%; /* Ajustar horizontalmente según necesidad */
+    transform: translate(-50%, -50%); /* Centrar el avión */
+}
+
+.bala {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red; /* Color de las balas */
+}
+
+#puntuacion {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: white;
+}
+
+#vidas {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 100px;
+    height: 20px;
+    background-color: red;
+    border: 1px solid black;
+}
+
+#vidas-barra {
+    width: 100%; /* Inicialmente al 100% */
+    height: 100%;
+    background-color: green;
+}
+
+#timón {
+    position: absolute;
+    bottom: -10px; /* Ajusta para que el timón esté fuera del marco */
+    right: 20px;
+    width: 150px; /* Tamaño más grande del timón */
+    height: 150px; /* Tamaño más grande del timón */
+    transition: transform 0.1s; /* Suaviza el movimiento del timón */
+}
+
+@keyframes parpadear {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.boton-parpadeante {
+    animation: parpadear 0.5s infinite;
+}
+
+.boton {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    line-height: 50px;
+}
+
+#btnA { top: 330px; left: 10px; }
+#btnS { top: 390px; left: 10px; }
+#btnW { top: 450px; left: 10px; }
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 790px) {
+    body {
+        background-image: url('fondo.jpg'); /* Cambia la imagen de fondo para móviles */
+    }
+
+    #marco {
+        width: 99%; /* Ancho del marco en dispositivos móviles */
+        height: 460px; /* Alto del marco en dispositivos móviles */
+    }
+
+    #fondo {
+        background-image: url('rocas1.png'); /* Cambia el fondo de las rocas para móviles */
+    }
+
+    .avion-rival {
+        width: 40px; /* Ajusta el tamaño del avión rival para móviles */
+        height: 20px; /* Ajusta el tamaño del avión rival para móviles */
+    }
+
+    #avion {
+        width: 55px; /* Ajusta el tamaño del avión principal para móviles */
+        height: 30px; /* Ajusta el tamaño del avión principal para móviles */
+    }
+
+    .bala {
+        width: 9px; /* Ajusta el tamaño de la bala para móviles */
+        height: 9px; /* Ajusta el tamaño de la bala para móviles */
+    }
+
+    #puntuacion {
+        font-size: 25px; /* Tamaño de fuente más pequeño para móviles */
+    }
+
+    #vidas {
+        top: 40px; /* Ajusta la posición de las vidas para móviles */
+        right: 10px; /* Ajusta la posición de las vidas para móviles */
+        width: 70px; /* Ancho del contenedor de vidas para móviles */
+        height: 10px; /* Alto del contenedor de vidas para móviles */
+    }
+
+    #timón {
+        width: 110px; /* Tamaño más pequeño del timón para móviles */
+        height: 110px; /* Tamaño más pequeño del timón para móviles */
+    }
+
+    .boton {
+        width: 45px; /* Ancho del botón para móviles */
+        height: 45px; /* Alto del botón para móviles */
+        font-size: 20px; /* Tamaño de fuente más pequeño para móviles */
+    }
+
+    #btnA { top: 220px; left: 10px; } /* Posición del botón A para móviles */
+    #btnS { top: 273px; left: 10px; } /* Posición del botón S para móviles */
+    #btnW { top: 327px; left: 10px; } /* Posición del botón W para móviles */
+}
+
